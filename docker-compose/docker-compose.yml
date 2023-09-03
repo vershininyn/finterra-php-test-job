@@ -1,0 +1,50 @@
+version: '3.9'
+
+networks:
+  fnetwork:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.19.238.0/24
+          gateway: 172.19.238.1
+
+services:
+  finterra-php-test-job:
+    restart: always
+    container_name: finterra-web-app-test-job
+    image: finterra-php-test-job-img
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    networks:
+      fnetwork:
+        ipv4_address: 172.19.238.10
+    ports:
+      - "8282:8282"
+
+#  finterra-dbms-postgresql:
+#    image: postgres:12.7
+#    container_name: finterra-postgresql{BUILD_TAG}
+#    restart: always
+#    environment:
+#      - POSTGRES_USER=root
+#      - POSTGRES_PASSWORD=root
+#      - POSTGRES_DB=finterra_db
+#      - POSTGRES_HOST_AUTH_METHOD: md5
+#    ports:
+#      - "172.19.0.2:5432:5432"
+#    volumes:
+#      - ./pg_data:/var/lib/postgresql/data:rw
+#    volumes:
+#      - db:/var/lib/mysql
+#      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+#    networks:
+#      vpcbr:
+#        ipv4_address: 172.19.0.2
+#    depends_on:
+#      - networks
+
+#volumes:
+#  db:
+#    driver: local

@@ -1,0 +1,10 @@
+#cli
+#readline
+#mbstring
+#zip
+#intl
+#xml
+#json
+#curl
+#gd
+#pgsql
