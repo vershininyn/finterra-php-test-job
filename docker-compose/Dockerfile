@@ -15,6 +15,8 @@ ARG FINTERRA_WEB_CONTAINER_APACHE2_DOCUMENT_ROOT="undefined"
 ARG FINTERRA_WEB_CONTAINER_APACHE2_WEB_APP_DIR="undefined"
 ARG FINTERRA_WEB_CONTAINER_APACHE2_CONF_DIR="undefined"
 
+ARG FINTERRA_ESCAPED_APACHE2_DOCUMENT_ROOT_TMP_FILE="undefined"
+
 ENV COMPOSER_VERSION=${FINTERRA_WEB_CONTAINER_COMPOSER_VERSION} \
     BUILD_DEPS="software-properties-common" \
     #
@@ -36,10 +38,12 @@ ENV COMPOSER_VERSION=${FINTERRA_WEB_CONTAINER_COMPOSER_VERSION} \
     APACHE2_WEB_APP_DIR=${FINTERRA_WEB_CONTAINER_APACHE2_WEB_APP_DIR} \
     APACHE2_CONF_DIR=${FINTERRA_WEB_CONTAINER_APACHE2_CONF_DIR} \
     #
-    DOCKER_ENTRY_POINT="/sbin/entrypoint.sh"
+    DOCKER_ENTRY_POINT="/sbin/entrypoint.sh" \
+    #
+    ESCAPED_APACHE2_DOCUMENT_ROOT_TMP_FILE=${FINTERRA_ESCAPED_APACHE2_DOCUMENT_ROOT_TMP_FILE} \
+    ESCAPED_DOCUMENT_ROOT_ENTRY_POINT="/sbin/get_escaped_path_from_script.sh"
 
-RUN \
-    apt-get update  \
+RUN apt-get update  \
     && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
     && apt-get install -y locales  \
     && locale-gen ${OS_LOCALE} \
@@ -50,11 +54,7 @@ RUN sudo mkdir -p ${PHP_DATA_DIR}/ ${APACHE2_WEB_APP_DIR}/ ${APACHE2_DOCUMENT_RO
 RUN rm -rf ${PHP_DATA_DIR}/php-modules.txt
 COPY ./conf/php-modules.txt  ${PHP_DATA_DIR}/php-modules.txt
 
-RUN rm -rf ${DOCKER_ENTRY_POINT}
-COPY ./conf/entrypoint.sh ${DOCKER_ENTRY_POINT}
-
-RUN	\
-    apt-get install --no-install-recommends -y ${BUILD_DEPS} \
+RUN	apt-get install --no-install-recommends -y ${BUILD_DEPS} \
     #
     && dpkg-reconfigure locales \
     && apt-get update \
@@ -80,7 +80,6 @@ RUN	\
 	# Forward request and error logs to docker log collector
 	&& ln -sf /dev/stdout /var/log/apache2/access.log \
 	&& ln -sf /dev/stderr /var/log/apache2/error.log \
-	&& chmod 755 /sbin/entrypoint.sh \
 	&& chown www-data:www-data ${PHP_DATA_DIR}/ -Rf \
     && service apache2 stop
 
@@ -88,12 +87,25 @@ RUN rm -rf ${APACHE2_CONF_DIR}/envvars
 COPY ./conf/envvars ${APACHE2_CONF_DIR}/envvars
 
 ENV APACHE_CONF_DIR_ENVVARS=${APACHE2_CONF_DIR}/envvars
+RUN sed -i "s;#ENV_SERVER_IPv4_HOST#;${APACHE2_IPv4_HOST};g" ${APACHE_CONF_DIR_ENVVARS}
+RUN sed -i "s;#ENV_SERVER_IPv4_PORT#;${APACHE2_IPv4_PORT};g" ${APACHE_CONF_DIR_ENVVARS}
 
-RUN sed -i "s/#ENV_SERVER_IPv4_HOST#/${APACHE2_IPv4_HOST}/g" ${APACHE_CONF_DIR_ENVVARS}
-RUN sed -i "s/#ENV_SERVER_IPv4_PORT#/${APACHE2_IPv4_PORT}/g" ${APACHE_CONF_DIR_ENVVARS}
+#ENV ESCAPED_APACHE2_DOCUMENT_ROOT_TMP_PATH=${PHP_DATA_DIR}/${ESCAPED_APACHE2_DOCUMENT_ROOT_TMP_FILE}
+#
+#RUN rm -rf ${ESCAPED_APACHE2_DOCUMENT_ROOT_TMP_PATH}  \
+#    && touch ${ESCAPED_APACHE2_DOCUMENT_ROOT_TMP_PATH} \
+#    && echo ${APACHE2_DOCUMENT_ROOT} > ${ESCAPED_APACHE2_DOCUMENT_ROOT_TMP_PATH} \
+#    && sed -i "s;\/;\\\/;g" ${ESCAPED_APACHE2_DOCUMENT_ROOT_TMP_PATH}
+#
+#RUN rm -rf ${ESCAPED_DOCUMENT_ROOT_ENTRY_POINT}
+#COPY ./conf/get_escaped_path_from_script.sh ${ESCAPED_DOCUMENT_ROOT_ENTRY_POINT}
+#RUN chmod +x ${ESCAPED_DOCUMENT_ROOT_ENTRY_POINT}
+#
+#export ESCAPED_APACHE2_DOCUMENT_ROOT_VAR_FROM_SH=$(head -n 1 "$1")
 
-ENV ESCAPED_APACHE2_DOCUMENT_ROOT="$(sed 's/\//\\\//g' <<< ${APACHE2_DOCUMENT_ROOT})"
-RUN sed -i "s;#ENV_SERVER_DOCUMENT_ROOT#;${ESCAPED_APACHE2_DOCUMENT_ROOT};g" ${APACHE_CONF_DIR_ENVVARS}
+RUN /bin/bash -c "ESCAPED_APACHE2_DOCUMENT_ROOT_VAR="${$ESCAPED_APACHE2_DOCUMENT_ROOT_VAR:-`echo '$APACHE2_DOCUMENT_ROOT' | sed 's;\/;\\\/;g'`}""
+
+RUN sed -i "s;#ENV_SERVER_DOCUMENT_ROOT#;${ESCAPED_APACHE2_DOCUMENT_ROOT_VAR};g" ${APACHE_CONF_DIR_ENVVARS}
 
 RUN rm -rf ${APACHE2_CONF_DIR}/apache2.conf
 COPY ./conf/apache2.conf ${APACHE2_CONF_DIR}/apache2.conf
@@ -107,12 +119,14 @@ COPY ./conf/web-app.conf ${APACHE2_CONF_DIR}/sites-enabled/web-app.conf
 RUN rm -rf ${PHP_CONF_DIR}/apache2/conf.d/custom.ini
 COPY ./conf/php.ini ${PHP_CONF_DIR}/apache2/conf.d/custom.ini
 
-WORKDIR ${APACHE2_WEB_APP_DIR}
-
-#RUN useradd -m finterra_yii2 && echo "finterra_yii2:finterra_yii2" | chpasswd && adduser finterra_yii2 sudo
-
 # Expose port's from container
 EXPOSE ${APACHE2_IPv4_PORT}
+
+RUN rm -rf ${DOCKER_ENTRY_POINT}
+COPY ./conf/entrypoint.sh ${DOCKER_ENTRY_POINT}
+RUN chmod +x ${DOCKER_ENTRY_POINT}
+
+WORKDIR ${APACHE2_WEB_APP_DIR}
 
 # By default, simply start apache.
 CMD ["${DOCKER_ENTRY_POINT}"]

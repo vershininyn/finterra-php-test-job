@@ -1,0 +1,1 @@
+export ESCAPED_APACHE2_DOCUMENT_ROOT_VAR_FROM_SH=$(head -n 1 "$1")
