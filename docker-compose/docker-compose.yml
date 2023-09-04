@@ -32,8 +32,6 @@ services:
         FINTERRA_WEB_CONTAINER_APACHE2_DOCUMENT_ROOT: "/var/www/web-app"
         FINTERRA_WEB_CONTAINER_APACHE2_WEB_APP_DIR: "/var/www/web-app"
         FINTERRA_WEB_CONTAINER_APACHE2_CONF_DIR: "/etc/apache2"
-
-        FINTERRA_ESCAPED_APACHE2_DOCUMENT_ROOT_TMP_FILE: "escaped_apache2_document_root_tmp.txt"
     networks:
       fnetwork:
         ipv4_address: 172.19.238.10
