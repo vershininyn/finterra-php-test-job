@@ -36,22 +36,7 @@ services:
       fnetwork:
         ipv4_address: 172.19.238.10
     ports:
-      - "172.19.238.10:8282:8282"
-#    environment:
-#      FINTERRA_WEB_CONTAINER_IPv4_HOST: "0.0.0.0"
-#      FINTERRA_WEB_CONTAINER_IPv4_PORT: "8282"
-#
-#      FINTERRA_WEB_CONTAINER_DEBIAN_OS_LOCALE: "en_US.UTF-8"
-#      FINTERRA_WEB_CONTAINER_DEBIAN_OS_TZ: "Europe/Moscow"
-#
-#      FINTERRA_WEB_CONTAINER_PHP_VERSION: "8.2"
-#      FINTERRA_WEB_CONTAINER_PHP_DATA_DIR: "/var/lib/php"
-#
-#      FINTERRA_WEB_CONTAINER_COMPOSER_VERSION: "2.6.1"
-#
-#      FINTERRA_WEB_CONTAINER_APACHE2_DOCUMENT_ROOT: "/var/www/web-app"
-#      FINTERRA_WEB_CONTAINER_APACHE2_WEB_APP_DIR: "/var/www/web-app"
-#      FINTERRA_WEB_CONTAINER_APACHE2_CONF_DIR: "/etc/apache2"
+      - "8282:8282"
     volumes:
       - ./web-app:/var/www/web-app/
 
