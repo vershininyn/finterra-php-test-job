@@ -12,14 +12,13 @@ networks:
 services:
   finterra-php-test-job:
     restart: always
-    container_name: finterra-web-app-test-job
+    container_name: finterra-yii2-web-app-test-job
     image: finterra-web-app-test-job-img
     build:
       context: .
       dockerfile: ./Dockerfile
       args:
         FINTERRA_WEB_CONTAINER_IPv4_HOST: "0.0.0.0"
-        FINTERRA_WEB_CONTAINER_IPv4_PORT: "8282"
 
         FINTERRA_WEB_CONTAINER_DEBIAN_OS_LOCALE: "en_US.UTF-8"
         FINTERRA_WEB_CONTAINER_DEBIAN_OS_TZ: "Europe/Moscow"
@@ -27,18 +26,24 @@ services:
         FINTERRA_WEB_CONTAINER_PHP_VERSION: "8.2"
         FINTERRA_WEB_CONTAINER_PHP_DATA_DIR: "/var/lib/php"
 
-        FINTERRA_WEB_CONTAINER_COMPOSER_VERSION: "2.6.1"
-
-        FINTERRA_WEB_CONTAINER_APACHE2_DOCUMENT_ROOT: "/var/www/web-app"
-        FINTERRA_WEB_CONTAINER_APACHE2_WEB_APP_DIR: "/var/www/web-app"
         FINTERRA_WEB_CONTAINER_APACHE2_CONF_DIR: "/etc/apache2"
+
+        FINTERRA_WEB_CONTAINER_APACHE2_DOCUMENT_ROOT: "/var/www/yii2-web-app"
+
+        FINTERRA_WEB_CONTAINER_APACHE2_YII2_FRONTEND_FROM_ROOT_PATH: "frontend/web"
+        FINTERRA_WEB_CONTAINER_APACHE2_YII2_BACKEND_FROM_ROOT_PATH: "backend/web"
+
+        FINTERRA_WEB_CONTAINER_APACHE2_SERVER_IPv4_YII2_FRONTEND_PORT: "8282"
+        FINTERRA_WEB_CONTAINER_APACHE2_SERVER_IPv4_YII2_BACKEND_PORT: "8383"
     networks:
       fnetwork:
         ipv4_address: 172.19.238.10
     ports:
       - "8282:8282"
+      - "8383:8383"
     volumes:
-      - ./web-app:/var/www/web-app/
+      # Path on the host, relative to the Compose file
+      - ../yii2-web-app:/var/www/yii2-web-app
 
 #  finterra-dbms-postgresql:
 #    image: postgres:12.7
@@ -61,7 +66,3 @@ services:
 #        ipv4_address: 172.19.0.2
 #    depends_on:
 #      - networks
-
-#volumes:
-#  db:
-#    driver: local

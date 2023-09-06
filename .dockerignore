@@ -118,7 +118,6 @@ resources/tmp/*
 
 # Python
 __pycache__/
-build/
 develop-eggs/
 dist/
 downloads/
@@ -148,9 +147,6 @@ venv.bak/
 /site
 cython_debug/
 
-# VVVV
-bin/
-
 # CodeIgniter
 */config/development
 */cache/*
@@ -162,10 +158,8 @@ appengine-generated/
 
 # Objective-C
 xcuserdata/
-build/
 DerivedData/
 Carthage/Build/
-fastlane/test_output
 iOSInjectionProject/
 
 # GWT
@@ -183,9 +177,6 @@ modules/
 # ROS
 devel/
 logs/
-build/
-bin/
-lib/
 msg_gen/
 srv_gen/
 build_isolated/
@@ -194,7 +185,6 @@ devel_isolated/
 qtcreator-*
 /planning/cfg
 /planning/docs
-*~
 CATKIN_IGNORE
 
 # Stella
@@ -265,15 +255,6 @@ _book
 # ArchLinuxPackages
 pkg/
 
-# Swift
-xcuserdata/
-build/
-DerivedData/
-Carthage/Build/
-Dependencies/
-fastlane/test_output
-iOSInjectionProject/
-
 # Packer
 packer_cache/
 
@@ -284,7 +265,6 @@ packer_cache/
 /doc
 
 # Phalcon
-/cache/
 /config/development/
 
 # Unity
@@ -305,7 +285,6 @@ ExportedObj/
 
 # Kohana
 application/cache/*
-application/logs/*
 
 # Prestashop
 /cache/*
@@ -332,7 +311,6 @@ themes/*/
 !themes/_core
 !themes/_libraries
 bower_components/
-node_modules/
 php-cs-fixer
 translations/*
 mails/*
@@ -354,11 +332,9 @@ themes/default-bootstrap/modules/*/mails/*
 /var/logs/*
 !/var/sessions
 /var/sessions/*
-/vendor/
 /web/bundles/
 
 # ExtJs
-build/
 ext/
 
 # CMake
@@ -379,7 +355,6 @@ _deps
 **/App_Data/cache/
 
 # CakePHP
-/vendor/*
 /tmp/cache/models/*
 !/tmp/cache/models/empty
 /tmp/cache/persistent/*
@@ -390,7 +365,6 @@ _deps
 !/tmp/sessions/empty
 /tmp/tests/*
 !/tmp/tests/empty
-/logs/*
 !/logs/empty
 /app/tmp/*
 /vendors/*
@@ -402,21 +376,12 @@ hs_err_pid*
 /app/cache/*
 /app/logs/*
 /app/spool/*
-/var/cache/*
-/var/logs/*
-/var/sessions/*
 /var/log/*
 /bin/*
 !bin/console
 !bin/symfony_requirements
-/vendor/
-/web/bundles/
 /web/uploads/
-/build/
 **/Entity/*~
-
-# Composer
-/vendor/
 
 # SymphonyCMS
 manifest/cache/
@@ -447,27 +412,12 @@ workspace/uploads/
 /server/standard/tmp
 /server/standard/work
 
-# JBoss4
-/server/all/data
-/server/all/log
-/server/all/tmp
-/server/all/work
-/server/default/data
-/server/default/log
-/server/default/tmp
-/server/default/work
-/server/minimal/data
-/server/minimal/log
-/server/minimal/tmp
-/server/minimal/work
-
 # Red
 quick-test/runnable/
 system/tests/source/units/auto-tests/
 tests/source/units/auto-tests/
 
 # Snap
-parts/
 prime/
 stage/
 
@@ -484,9 +434,6 @@ local
 # Nikola
 cache/
 output/
-
-# JupyterNotebooks
-profile_default/
 
 # Puppet
 pkg/*
@@ -611,8 +558,6 @@ ipshared
 /pub/media/tmp/*
 /pub/media/captcha/*
 /pub/static/*
-/var/*
-/vendor/*
 /generated/*
 
 # Bitrix
@@ -659,7 +604,6 @@ build_*
 /media/xmlconnect/original/*
 !/media/xmlconnect/system
 /media/xmlconnect/system/*
-/var/*
 !/var/package
 /var/package/*
 
@@ -677,7 +621,6 @@ EWARM/**/Exe
 EWARM/settings
 
 # esp-idf
-build/
 sdkconfig
 
 # Concrete5
@@ -764,8 +707,6 @@ Mercury/
 /administrator/templates/hathor/*
 /administrator/templates/isis/*
 /administrator/templates/system/*
-/bin/*
-/cache/*
 /cli/*
 /components/com_ajax/*
 /components/com_banners/*
@@ -970,7 +911,6 @@ themes/classic/views/
 
 # Rust
 debug/
-target/
 
 # Node
 logs
@@ -979,15 +919,11 @@ lib-cov
 coverage
 bower_components
 build/Release
-node_modules/
 jspm_packages/
 web_modules/
-out
 dist
 
 # PureScript
-bower_components
-node_modules
 output
 
 # JBoss
@@ -1025,26 +961,20 @@ demos/
 extras/documentation
 
 # PlayFramework
-bin/
 /db
-/lib/
 /logs/
-/modules
 /project/project
 /project/target
-/target
 tmp/
 test-result
 /dist/
 
 # SugarCRM
-/cache/*
 /custom/history/
 /custom/modulebuilder/
 /custom/working/
 /custom/modules/*/Ext/
 /custom/application/Ext/
-/upload/*
 /upload_backup/
 
 # ExpressionEngine
@@ -1060,23 +990,8 @@ _thumbs/
 */expressionengine/cache/*
 
 # KiCad
-*~
 _autosave-*
 fp-info-cache
-
-# Plone
-bin/
-build/
-develop-eggs/
-downloads/
-eggs/
-fake-eggs/
-parts/
-dist/
-var/
-
-# D
-docs/
 
 # CFWheels
 plugins/**/*
@@ -1085,14 +1000,7 @@ db/sql
 javascripts/bundles
 stylesheets/bundles
 
-# Yeoman
-node_modules/
-bower_components/
-build/
-dist/
-
 # Nanoc
-output/
 tmp/nanoc/
 
 # Erlang
@@ -1102,9 +1010,7 @@ _build/
 _checkouts/
 
 # VisualStudio
-[Dd]ebug/
 [Dd]ebugPublic/
-[Rr]elease/
 [Rr]eleases/
 x64/
 x86/
@@ -1112,8 +1018,6 @@ x86/
 [Aa][Rr][Mm]/
 [Aa][Rr][Mm]64/
 bld/
-[Bb]in/
-[Oo]bj/
 [Ll]og/
 [Ll]ogs/
 Generated\ Files/
@@ -1146,19 +1050,16 @@ BundleArtifacts/
 !?*.[Cc]ache/
 ClientBin/
 ~$*
-*~
 Generated_Code/
 _UpgradeReport_Files/
 Backup*/
 ServiceFabricBackup/
 FakesAssemblies/
-node_modules/
 **/*.HTMLClient/GeneratedArtifacts
 **/*.DesktopClient/GeneratedArtifacts
 **/*.Server/GeneratedArtifacts
 _Pvt_Extensions
 paket-files/
-__pycache__/
 OpenCover/
 ASALocalRun/
 healthchecksdb
@@ -1167,7 +1068,6 @@ MigrationBackup/
 # Perl
 !Build/
 cover_db/
-_build/
 Build
 inc/
 /blib/
@@ -1176,17 +1076,10 @@ inc/
 /pm_to_blib
 
 # OCaml
-_build/
 _opam/
 
 # Agda
 MAlonzo/**
-
-# Clojure
-/lib/
-/classes/
-/target/
-/checkouts/
 
 # OpenCart
 download/
@@ -1197,9 +1090,6 @@ system/logs/
 system/storage/
 vqmod/logs/*
 vqmod/vqcache/*
-
-# Kotlin
-hs_err_pid*
 
 # Julia
 deps/downloads/
@@ -1219,7 +1109,6 @@ $RECYCLE.BIN/
 test-results/
 
 # JDeveloper
-temp/
 classes/
 deploy/
 javadoc/
@@ -1268,7 +1157,6 @@ tmtags
 
 # Lazarus
 backup/
-lib/
 *.app/
 
 # macOS
@@ -1287,18 +1175,7 @@ sccprj/
 codegen/
 octave-workspace
 
-# FlexBuilder
-bin/
-bin-debug/
-bin-release/
-
-# Eclipse
-bin/
-tmp/
-
 # Vim
-*~
-tags
 
 # SynopsysVCS
 simv
@@ -1309,7 +1186,6 @@ urgReport/
 DVEfiles/
 
 # Emacs
-*~
 \#*\#
 auto-save-list
 tramp
@@ -1318,16 +1194,11 @@ tramp
 /eshell/lastdir
 /elpa/
 /auto/
-dist/
 /server/
 
 # Momentics
-x86/
 arm/
 arm-p/
-
-# Linux
-*~
 
 # SublimeText
 Package Control.cache/
@@ -1341,11 +1212,6 @@ Package Control.ca-certs/
 _notes
 _compareTemp
 configs/
-
-# Xcode
-xcuserdata/
-build/
-DerivedData/
 
 # WebMethods
 **/IntegrationServer/datastore/
@@ -1371,25 +1237,14 @@ transcript*
 
 # NetBeans
 **/nbproject/private/
-build/
 nbbuild/
-dist/
 nbdist/
 
 # JetBrains
 cmake-build-*/
-out/
-
-# Octave
-helpsearch*/
-slprj/
-sccprj/
-codegen/
-octave-workspace
 
 # SBT
 dist/*
-target/
 lib_managed/
 project/boot/
 project/plugins/project/
@@ -1407,29 +1262,8 @@ _xmsgs/
 /play-stash
 /github-cache
 
-# Magento
-/media/*
-!/media/customer
-/media/customer/*
-!/media/dhl
-/media/dhl/*
-!/media/downloadable
-/media/downloadable/*
-!/media/xmlconnect
-/media/xmlconnect/*
-!/media/xmlconnect/custom
-/media/xmlconnect/custom/*
-!/media/xmlconnect/original
-/media/xmlconnect/original/*
-!/media/xmlconnect/system
-/media/xmlconnect/system/*
-/var/*
-!/var/package
-/var/package/*
-
 # TurboGears2
 data/*
-dist
 build
 
 # ChefCookbook
@@ -1451,10 +1285,8 @@ TSWLatexianTemp*
 /coverage/
 /spec/tmp
 /log/*
-/tmp/*
 /vendor/bundle
 /vendor/assets/bower_components
-node_modules/
 /public/packs
 /public/packs-test
 /public/assets
@@ -1462,24 +1294,20 @@ node_modules/
 /public/uploads
 
 # Dart
-build/
 doc/api/
 
 # Ruby
-/coverage/
 /InstalledFiles
 /pkg/
 /spec/reports/
 /test/tmp/
 /test/version_tmp/
 /tmp/
-build/
 build-iPhoneOS/
 build-iPhoneSimulator/
 /_yardoc/
 /doc/
 /rdoc/
-/vendor/bundle
 /lib/bundler/man/
 
 # Textpattern
@@ -1503,16 +1331,12 @@ textpattern/
 /install-sh
 /missing
 /stamp-h1
-Makefile
 
 # Qooxdoo
 cache
 cache-downloads
 inspector
 api
-
-# Maven
-target/
 
 # Waf
 waf-*-*/
@@ -1528,13 +1352,10 @@ Referenced Packages
 # SeamGen
 /bootstrap/data
 /bootstrap/tmp
-/classes/
-/dist/
 /exploded-archives/
 /test-build/
 /test-output/
 /test-report/
-/target/
 
 # RhodesRhomobile
 rholog-*
@@ -1549,7 +1370,6 @@ Builds*
 Debug*/Debug*\ Libs
 
 # Haskell
-dist
 dist-*
 cabal-dev
 
@@ -1557,15 +1377,9 @@ cabal-dev
 elm-stuff
 repl-temp-*
 
-# AppceleratorTitanium
-build/
-
 # CraftCMS
 /craft/storage/*
 !/craft/storage/rebrand
 
 # Gradle
 **/build/
-
-# Elisp
-*~
