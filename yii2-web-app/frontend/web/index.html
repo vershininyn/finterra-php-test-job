@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" xmlns:th="http://www.thymeleaf.org">>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+            integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer">
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.6/underscore-min.js"
+            integrity="sha512-2V49R8ndaagCOnwmj8QnbT1Gz/rie17UouD9Re5WxbzRVUGoftCu5IuqqtAM9+UC3fwfHCSJR1hkzNQh/2wdtg=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer">
+    </script>
+
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.js"-->
+<!--            integrity="sha512-Xo0Jh8MsOn72LGV8kU5LsclG7SUzJsWGhXbWcYs2MAmChkQzwiW/yTQwdJ8w6UA9C6EVG18GHb/TrYpYCjyAQw=="-->
+<!--            crossorigin="anonymous"-->
+<!--            referrerpolicy="no-referrer">-->
+<!--    </script>-->
+
+    <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.9.3/dist/semantic.min.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.9.3/dist/semantic.min.css" rel="stylesheet">
+
+    <script src="/js/index.js"></script>
+
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css"-->
+<!--          integrity="sha512-KXol4x3sVoO+8ZsWPFI/r5KBVB/ssCGB5tsv2nVOKwLg33wTFP3fmnXa47FdSVIshVTgsYk/1734xSk9aFIa4A=="-->
+<!--          crossorigin="anonymous"-->
+<!--          referrerpolicy="no-referrer"/>-->
+
+<!--    <link rel="stylesheet" href="/css/index.css">-->
+</head>
+<body>
+<div class="ui two column centered aligned grid">
+    <div class="four column centered row">
+        <div class="ui placeholder segment">
+            <div class="ui two column stackable center aligned grid">
+                <div class="middle aligned row">
+                    <div class="eight wide column">
+                        <h3 class="ui center aligned header">
+                            Перевод ОТ пользователя
+                        </h3>
+                        <div class="ui one column center aligned grid">
+                            <div class="center aligned row">
+                                <div class="ui left action right labeled input">
+                                    <div class="ui basic floating dropdown simple button">
+                                        <div class="text">Выберите пользователя:</div>
+                                        <i class="dropdown icon"></i>
+                                        <div class="menu">
+                                            <div class="item">--0--</div>
+                                            <div class="item">--1--</div>
+                                        </div>
+                                    </div>
+                                    <input type="text" placeholder="Выберите GUID пользователя...">
+                                    <div class="ui basic label">GUID</div>
+                                </div>
+                            </div>
+                            <div class="center aligned row">
+                                <div class="ui right labeled input">
+                                    <label for="from-balance-amount" class="ui label">Баланс:</label>
+                                    <input type="text" placeholder="Amount" id="from-balance-amount">
+                                    <div class="ui basic label">RUB</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="eight wide column">
+                        <h3 class="ui center aligned header">
+                            Перевод К пользователю
+                        </h3>
+                        <div class="ui one column center aligned grid">
+                            <div class="center aligned row">
+                                <div class="ui left action right labeled input">
+                                    <div class="ui basic floating dropdown simple button">
+                                        <div class="text">Выберите пользователя:</div>
+                                        <i class="dropdown icon"></i>
+                                        <div class="menu">
+                                            <div class="item">--0--</div>
+                                            <div class="item">--1--</div>
+                                        </div>
+                                    </div>
+                                    <input type="text" placeholder="Search">
+                                    <div class="ui basic label">GUID</div>
+                                </div>
+                            </div>
+                            <div class="center aligned row">
+                                <div class="ui right labeled input">
+                                    <label for="to-balance-amount" class="ui label">Баланс:</label>
+                                    <input type="text" placeholder="Amount" id="to-balance-amount">
+                                    <div class="ui basic label">RUB</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ui vertical divider">
+                ОТ Перевод К
+            </div>
+        </div>
+        <div class="ui one column stackable center aligned grid">
+            <div class="middle aligned row">
+                <div class="ui right labeled action input">
+                    <label for="from-transfer-sum-amount" class="ui label">Сумма перевода:</label>
+                    <div class="ui basic label">RUB</div>
+                    <input type="text" placeholder="Сумма перевода..." id="from-transfer-sum-amount">
+                    <button class="ui green button">
+                        Перевести
+                    </button>
+                </div>
+            </div>
+            <div class="middle aligned row">
+                <div class="ui calendar" id="standard_calendar">
+                    <div class="ui fluid input left icon">
+                        <i class="calendar icon"></i>
+                        <input type="text" placeholder="Date/Time">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui placeholder segment">
+            <div class="ui one column stackable center aligned grid">
+                <table class="ui celled table">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Job</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td data-label="Name">James</td>
+                        <td data-label="Age">24</td>
+                        <td data-label="Job">Engineer</td>
+                    </tr>
+                    <tr>
+                        <td data-label="Name">Jill</td>
+                        <td data-label="Age">26</td>
+                        <td data-label="Job">Engineer</td>
+                    </tr>
+                    <tr>
+                        <td data-label="Name">Elyse</td>
+                        <td data-label="Age">24</td>
+                        <td data-label="Job">Designer</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ui modal">
+    <i class="close icon"></i>
+    <div class="header">
+        Connection status
+    </div>
+    <div class="content" id="verify-host-and-port-and-xml">
+
+    </div>
+    <div class="actions">
+        <div class="ui approve green right labeled icon button">
+            Close
+            <i class="checkmark icon"></i>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
