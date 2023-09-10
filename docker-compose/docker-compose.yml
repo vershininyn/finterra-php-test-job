@@ -45,24 +45,21 @@ services:
       # Path on the host, relative to the Compose file
       - ../yii2-web-app:/var/www/yii2-web-app
 
-#  finterra-dbms-postgresql:
-#    image: postgres:12.7
-#    container_name: finterra-postgresql{BUILD_TAG}
-#    restart: always
-#    environment:
-#      - POSTGRES_USER=root
-#      - POSTGRES_PASSWORD=root
-#      - POSTGRES_DB=finterra_db
-#      - POSTGRES_HOST_AUTH_METHOD: md5
-#    ports:
-#      - "172.19.0.2:5432:5432"
-#    volumes:
-#      - ./pg_data:/var/lib/postgresql/data:rw
-#    volumes:
-#      - db:/var/lib/mysql
-#      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-#    networks:
-#      vpcbr:
-#        ipv4_address: 172.19.0.2
-#    depends_on:
-#      - networks
+  finterra-dbms-postgresql:
+    image: postgres:12.7
+    container_name: finterra-postgresql
+    restart: always
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=finterra_db
+      - POSTGRES_HOST_AUTH_METHOD=md5
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./pg_data:/var/lib/postgresql/data:rw
+    networks:
+      fnetwork:
+        ipv4_address: 172.19.238.11
+    depends_on:
+      - networks
